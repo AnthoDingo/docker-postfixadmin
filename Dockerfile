@@ -25,6 +25,7 @@ RUN echo "@community https://nl.alpinelinux.org/alpine/v3.5/community" >> /etc/a
     ${BUILD_DEPS} \
     nginx \
     s6 \
+    git \
     su-exec \
     dovecot \
     php7-fpm@community \
@@ -32,20 +33,9 @@ RUN echo "@community https://nl.alpinelinux.org/alpine/v3.5/community" >> /etc/a
     php7-mysqli@community \
     php7-session@community \
     php7-mbstring@community \
- && cd /tmp \
- && PFA_TARBALL="postfixadmin-${VERSION}.tar.gz" \
- && wget -q https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/${PFA_TARBALL} \
- && echo "Verifying ${PFA_TARBALL} using GPG..." \
- && wget -q https://downloads.sourceforge.net/project/postfixadmin/postfixadmin/postfixadmin-${VERSION}/${PFA_TARBALL}.asc \
- && gpg --keyserver keys.gnupg.net --recv-keys ${GPG_SHORTID} \
- && FINGERPRINT="$(LANG=C gpg --verify ${PFA_TARBALL}.asc ${PFA_TARBALL} 2>&1 \
-  | sed -n "s#Primary key fingerprint: \(.*\)#\1#p")" \
- && if [ -z "${FINGERPRINT}" ]; then echo "Warning! Invalid GPG signature!" && exit 1; fi \
- && if [ "${FINGERPRINT}" != "${GPG_FINGERPRINT}" ]; then echo "Warning! Wrong GPG fingerprint!" && exit 1; fi \
- && echo "All seems good, now unpacking ${PFA_TARBALL}..." \
- && mkdir /postfixadmin && tar xzf ${PFA_TARBALL} -C /postfixadmin && mv /postfixadmin/postfixadmin-$VERSION/* /postfixadmin \
+ && git clone https://github.com/AnthoDingo/postfixadmin.git /postfixadmin \
  && apk del ${BUILD_DEPS} \
- && rm -rf /var/cache/apk/* /tmp/* /root/.gnupg /postfixadmin/postfixadmin-$VERSION*
+ && rm -rf /var/cache/apk/* /tmp/* /root/.gnupg
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY php-fpm.conf /etc/php7/php-fpm.conf
