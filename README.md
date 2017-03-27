@@ -30,6 +30,7 @@ PostfixAdmin is a web based interface used to manage mailboxes, virtual domains 
 | -------- | ----------- | ---- | ------------- |
 | **UID** | postfixadmin user id | *optional* | 991
 | **GID** | postfixadmin group id | *optional* | 991
+| **DBTYPE** | PHP connector mysql/mysqli | *optional* | mysqli
 | **DBHOST** | MariaDB instance ip/hostname | *optional* | mariadb
 | **DBUSER** | MariaDB database username | *optional* | postfix
 | **DBNAME** | MariaDB database name | *optional* | postfix
