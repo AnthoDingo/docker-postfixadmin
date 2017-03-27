@@ -12,6 +12,7 @@ ARG GPG_FINGERPRINT="2D83 3163 D69B B8F6 BFEF  179D 4ECC 3566 EB7E B945"
 
 ENV GID=991 \
     UID=991 \
+    DBTYPE=mysqli \
     DBHOST=mariadb \
     DBUSER=postfix \
     DBNAME=postfix \

@@ -19,7 +19,7 @@ cat > /postfixadmin/config.local.php <<EOF
 
 \$CONF['configured'] = true;
 
-\$CONF['database_type'] = 'mysqli';
+\$CONF['database_type'] = '${DBTYPE}';
 \$CONF['database_host'] = '${DBHOST}';
 \$CONF['database_user'] = '${DBUSER}';
 \$CONF['database_password'] = '${DBPASS}';
